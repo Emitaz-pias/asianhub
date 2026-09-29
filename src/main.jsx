@@ -4,8 +4,6 @@ import { ArrowUpRight, ShieldCheck, Zap, Headphones, Wallet, Globe2, BadgeCheck,
 import "./styles.css";
 
 const config = {
-  melbetUrl: "https://melbetasian.com",
-  oneXbetUrl: "https://1xbetasian.com",
   supportEmail: "team@YOUR-DOMAIN.com",
   telegramUrl: "https://t.me/YOUR_SUPPORT_USERNAME",
   formEndpoint: "" // Add a secure form endpoint (e.g. Formspree) before launch.
@@ -63,7 +61,7 @@ function App() {
         <button className="mobile-menu" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu">{menuOpen ? <X/> : <Menu/>}</button>
         <nav className={menuOpen ? "nav open" : "nav"}>
           <button onClick={() => jump("home")}>Home</button>
-          <button onClick={() => jump("platforms")}>Platforms</button>
+          <button onClick={() => jump("platforms")}>Games &amp; Sports</button>
           <button onClick={() => jump("agent")}>E-Wallet Agent</button>
           <button onClick={() => jump("steps")}>How to Apply</button>
           <button onClick={() => jump("faq")}>FAQ</button>
@@ -76,11 +74,11 @@ function App() {
         <section className="hero" id="home">
           <div className="hero-bg-glow"></div>
           <div className="hero-copy">
-            <div className="eyebrow"><span className="pulse"></span> PLATFORM INFORMATION <i/> E-WALLET AGENT</div>
+            <div className="eyebrow"><span className="pulse"></span> GAMES &amp; SPORTS <i/> E-WALLET AGENT</div>
             <h1>One hub.<br/>Clear choices.<br/><em>New opportunities.</em></h1>
-            <p>Explore platform information and learn about E-Wallet Agent opportunities. Review the details, eligibility, and terms before proceeding.</p>
+            <p>Explore games and sports information, and learn about E-Wallet Agent opportunities. Review the details, eligibility, and terms before proceeding.</p>
             <div className="hero-actions">
-              <button className="btn primary" onClick={() => jump("platforms")}>Explore Platforms <ArrowUpRight size={17}/></button>
+              <button className="btn primary" onClick={() => jump("platforms")}>Explore Games &amp; Sports <ArrowUpRight size={17}/></button>
               <button className="btn secondary" onClick={() => jump("agent")}>Become an E-Wallet Agent</button>
             </div>
             <div className="trust-row"><span><ShieldCheck/> Clear information</span><span><Zap/> Simple process</span><span><Headphones/> Support contact</span></div>
@@ -93,22 +91,19 @@ function App() {
         </section>
 
         <section className="platforms section" id="platforms">
-          <div className="section-heading"><span className="kicker">OUR PLATFORMS</span><h2>Explore <em>Platform Information</em></h2><p>Visit the official websites to review their services, availability, and terms. Access is subject to local laws and eligibility.</p></div>
+          <div className="section-heading"><span className="kicker">GAMES &amp; SPORTS</span><h2>Explore <em>Games and Sports</em></h2><p>Find information about popular games and sports, and learn about the E-Wallet Agent application process.</p></div>
           <div className="platform-grid">
-            <article className="platform-card melbet">
-              <div className="platform-brand"><span className="brand-word">MEL<span>BET</span></span><span className="platform-tag">PLATFORM 01</span></div>
-              <p>Visit the MelBet Asian website to review the platform's information and applicable terms.</p>
-              <ul><li><CheckCircle2/> Platform information</li><li><CheckCircle2/> Services and terms</li><li><CheckCircle2/> Eligibility details</li></ul>
-              <a className="btn primary full" href={config.melbetUrl} target="_blank" rel="noopener noreferrer">Visit MelBet Asian <ArrowUpRight size={17}/></a>
+            <article className="platform-card">
+              <div className="platform-brand"><span className="brand-word">GAMES</span><span className="platform-tag">GAME GUIDE</span></div>
+              <p>Explore game categories, learn how they work, and review the rules before you play.</p>
+              <ul><li><CheckCircle2/> Game information</li><li><CheckCircle2/> Rules and formats</li><li><CheckCircle2/> Play responsibly</li></ul>
             </article>
-            <article className="platform-card one-x">
-              <div className="platform-brand"><span className="brand-word">1X<span>BET</span></span><span className="platform-tag">PLATFORM 02</span></div>
-              <p>Visit the 1xBet Asian website to review the platform's information and applicable terms.</p>
-              <ul><li><CheckCircle2/> Platform information</li><li><CheckCircle2/> Services and terms</li><li><CheckCircle2/> Eligibility details</li></ul>
-              <a className="btn blue full" href={config.oneXbetUrl} target="_blank" rel="noopener noreferrer">Visit 1xBet Asian <ArrowUpRight size={17}/></a>
+            <article className="platform-card">
+              <div className="platform-brand"><span className="brand-word">SPORTS</span><span className="platform-tag">SPORTS GUIDE</span></div>
+              <p>Explore sports and competitions, with useful context for fans and visitors.</p>
+              <ul><li><CheckCircle2/> Sports overview</li><li><CheckCircle2/> Competition formats</li><li><CheckCircle2/> Latest information</li></ul>
             </article>
           </div>
-          <p className="disclosure">Asian Hub is an independent information and referral website. It is not the operator of the services linked above. Links may be affiliate links; a commission may be earned where applicable. Availability and legality vary by jurisdiction.</p>
         </section>
 
         <section className="agent-section section" id="agent">
@@ -163,9 +158,9 @@ function App() {
       </main>
 
       <footer className="footer">
-        <div className="footer-main"><div className="footer-about"><a className="brand" href="#home"><span>ASIAN</span><b>HUB</b></a><p>Platform information and E-Wallet Agent application resources.</p></div><div><h4>Explore</h4><button onClick={()=>jump("platforms")}>Platforms</button><button onClick={()=>jump("agent")}>E-Wallet Agent</button><button onClick={()=>jump("faq")}>FAQ</button><button onClick={()=>jump("contact")}>Contact</button></div><div><h4>Information</h4><a href="/terms.html">Terms & Conditions</a><a href="/privacy.html">Privacy Policy</a><a href="#disclosure">Affiliate Disclosure</a><a href="#responsible">Responsible Gambling</a></div><div><h4>Contact</h4><a href={`mailto:${config.supportEmail}`}><Mail size={15}/> {config.supportEmail}</a><a href={config.telegramUrl} target="_blank" rel="noopener noreferrer"><Send size={15}/> Telegram Support</a></div></div>
+        <div className="footer-main"><div className="footer-about"><a className="brand" href="#home"><span>ASIAN</span><b>HUB</b></a><p>Games, sports, and E-Wallet Agent information.</p></div><div><h4>Explore</h4><button onClick={()=>jump("platforms")}>Games &amp; Sports</button><button onClick={()=>jump("agent")}>E-Wallet Agent</button><button onClick={()=>jump("faq")}>FAQ</button><button onClick={()=>jump("contact")}>Contact</button></div><div><h4>Information</h4><a href="/terms.html">Terms & Conditions</a><a href="/privacy.html">Privacy Policy</a><a href="#responsible">Responsible Play</a></div><div><h4>Contact</h4><a href={`mailto:${config.supportEmail}`}><Mail size={15}/> {config.supportEmail}</a><a href={config.telegramUrl} target="_blank" rel="noopener noreferrer"><Send size={15}/> Telegram Support</a></div></div>
         <div className="footer-bottom"><span>© {new Date().getFullYear()} Asian Hub. All rights reserved.</span><span>18+ · Gambling can be harmful. Only use services where legal and permitted.</span></div>
-        <div className="hidden-anchors"><span id="disclosure">Affiliate disclosure: Links may be affiliate links.</span><span id="responsible">Responsible gambling: Set limits and seek help if gambling causes harm.</span></div>
+        <div className="hidden-anchors"><span id="responsible">Responsible play: Set limits and seek help if play causes harm.</span></div>
       </footer>
     </div>
   );
