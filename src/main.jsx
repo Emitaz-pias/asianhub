@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { createRoot } from "react-dom/client";
 import {
-  ArrowDown, ArrowUpRight, BadgeCheck, Check, ChevronDown, CircleHelp,
-  Gamepad2, Headphones, Mail, Menu, Monitor, Send, ShieldCheck, Smartphone,
-  Trophy, Users, Wallet, X
+  ArrowUpRight, BadgeCheck, Check, ChevronDown, CircleHelp, Headphones, Mail,
+  Menu, Send, ShieldCheck, Smartphone, Wallet, X
 } from "lucide-react";
 import "./styles.css";
 
@@ -85,22 +84,22 @@ function App() {
             </div>
             <div className="hero-pills"><span><Smartphone/> Mobile-friendly process</span><span><ShieldCheck/> Terms reviewed up front</span></div>
           </div>
-          <div className="hero-visual" aria-label="Illustration of a sports field and game controller">
-            <div className="visual-halo"></div><div className="field-lines"><span/><span/><span/></div>
-            <div className="hero-ball"><Trophy size={88} strokeWidth={1.2}/></div>
-            <div className="float-icon game-icon"><Gamepad2 size={30}/></div>
-            <div className="float-icon wallet-icon"><Wallet size={27}/></div>
-            <div className="visual-caption"><span className="caption-dot"/> COMMUNITY · SUPPORT · INFORMATION</div>
+          <div className="hero-visual" aria-label="Asian Hub games, sports, and agent program information">
+            <div className="visual-frame">
+              <div className="visual-topline"><span>ASIAN HUB</span><small>GAMES &amp; SPORTS PROGRAM</small></div>
+              <div className="visual-main"><span className="visual-index">INFORMATION / 01</span><strong>Clear details.<br/>A confident<br/><em>next step.</em></strong><div className="visual-rule"/><div className="visual-tags"><span>GAMES</span><span>SPORTS</span><span>AGENT SUPPORT</span></div></div>
+              <div className="visual-footer"><span>ASIAN HUB · AGENT PROGRAM</span><span>EXPLORE <ArrowUpRight size={15}/></span></div>
+            </div>
+            <div className="visual-stamp">AH<br/><span>01</span></div>
           </div>
-          <button className="scroll-cue" onClick={() => jump("about")} aria-label="Scroll to about section"><ArrowDown/></button>
         </section>
 
         <section className="stats-wrap" id="about">
           <div className="stats-card">
-            <div className="stat"><span className="stat-icon"><Users/></span><strong>01</strong><small>PERSONAL APPLICATION</small></div>
-            <div className="stat"><span className="stat-icon"><ShieldCheck/></span><strong>02</strong><small>REVIEW STAGES</small></div>
-            <div className="stat"><span className="stat-icon"><Headphones/></span><strong>1:1</strong><small>SUPPORT CONTACT</small></div>
-            <div className="stat"><span className="stat-icon"><BadgeCheck/></span><strong>18+</strong><small>ADULTS ONLY</small></div>
+            <div className="stat"><strong>Games</strong><small>GUIDES &amp; CATEGORIES</small></div>
+            <div className="stat"><strong>Sports</strong><small>EVENT INFORMATION</small></div>
+            <div className="stat"><strong>Agent</strong><small>PROGRAM OVERVIEW</small></div>
+            <div className="stat"><strong>Support</strong><small>APPLICATION HELP</small></div>
           </div>
         </section>
 
@@ -132,15 +131,15 @@ function App() {
             <ul className="check-list"><li><Check/> Adults interested in Games &amp; Sports communities</li><li><Check/> People who value clear rules and communication</li><li><Check/> Applicants ready to complete a verification process</li></ul>
             <button className="btn primary" onClick={() => jump("application")}>START AN APPLICATION <ArrowUpRight size={17}/></button>
           </div>
-          <div className="who-visual"><div className="who-circle"><Users size={115} strokeWidth={1}/></div><div className="who-badge"><BadgeCheck/><span>APPLICATION<br/><b>REVIEW</b></span></div></div>
+          <div className="who-visual"><div className="who-panel"><span className="who-panel-label">BEFORE YOU APPLY</span><h3>Know the role.<br/>Review the terms.</h3><p>Eligibility and availability may vary by location.</p><div><ShieldCheck/><span>Verify details with the authorized team.</span></div></div></div>
         </section>
 
         <section className="solutions section" id="solutions">
           <div className="section-heading"><span className="kicker">OUR SOLUTIONS</span><h2>Explore what <em>we offer.</em></h2><p>Start with the information that best matches your interests.</p></div>
           <div className="solution-grid">
-            <article className="solution-card"><span className="solution-icon"><Gamepad2/></span><span className="solution-label">01 / GAMES</span><h3>Games guide</h3><p>Learn about game categories, formats, and responsible play.</p><button onClick={() => jump("faq")}>Explore details <ArrowUpRight size={16}/></button></article>
-            <article className="solution-card featured"><span className="solution-icon"><Trophy/></span><span className="solution-label">02 / SPORTS</span><h3>Sports guide</h3><p>Find useful context about sports, competitions, and schedules.</p><button onClick={() => jump("faq")}>Explore details <ArrowUpRight size={16}/></button></article>
-            <article className="solution-card"><span className="solution-icon"><Wallet/></span><span className="solution-label">03 / SUPPORT</span><h3>E-Wallet Agent</h3><p>Review the application process and ask the team about the role.</p><button onClick={() => jump("application")}>Apply now <ArrowUpRight size={16}/></button></article>
+            <article className="solution-card"><span className="solution-icon">G</span><span className="solution-label">01 / GAMES</span><h3>Games guide</h3><p>Learn about game categories, formats, and responsible play.</p><button onClick={() => jump("faq")}>Explore details <ArrowUpRight size={16}/></button></article>
+            <article className="solution-card featured"><span className="solution-icon">S</span><span className="solution-label">02 / SPORTS</span><h3>Sports guide</h3><p>Find useful context about sports, competitions, and schedules.</p><button onClick={() => jump("faq")}>Explore details <ArrowUpRight size={16}/></button></article>
+            <article className="solution-card"><span className="solution-icon">A</span><span className="solution-label">03 / SUPPORT</span><h3>E-Wallet Agent</h3><p>Review the application process and ask the team about the role.</p><button onClick={() => jump("application")}>Apply now <ArrowUpRight size={16}/></button></article>
           </div>
         </section>
 
@@ -174,7 +173,7 @@ function App() {
 
       <footer className="footer">
         <div className="footer-main"><div className="footer-about"><a className="brand" href="#home"><span>ASIAN</span><b>HUB</b></a><p>Games, sports, and E-Wallet Agent information.</p></div><div><h4>Explore</h4><button onClick={() => jump("solutions")}>Solutions</button><button onClick={() => jump("working")}>Working with Us</button><button onClick={() => jump("faq")}>FAQ</button></div><div><h4>Information</h4><a href="/terms.html">Terms &amp; Conditions</a><a href="/privacy.html">Privacy Policy</a><a href="#responsible">Responsible Play</a></div><div><h4>Contacts</h4><a href={`mailto:${config.supportEmail}`}><Mail size={15}/> {config.supportEmail}</a><a href={config.telegramUrl} target="_blank" rel="noopener noreferrer"><Send size={15}/> Telegram Support</a></div></div>
-        <div className="footer-bottom"><span>© {new Date().getFullYear()} Asian Hub. All rights reserved.</span><span>18+ · Play responsibly and follow local laws.</span></div>
+        <div className="footer-bottom"><span>© {new Date().getFullYear()} Asian Hub. All rights reserved.</span><span>Asian Hub is an independent affiliate information site, not a service operator.</span></div>
         <div className="hidden-anchors"><span id="responsible">Responsible play: Set limits and seek help if play causes harm.</span></div>
       </footer>
     </div>
