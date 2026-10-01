@@ -1,24 +1,20 @@
 import React, { useState } from "react";
 import { createRoot } from "react-dom/client";
-import {
-  ArrowUpRight, BadgeCheck, Check, ChevronDown, CircleHelp, Headphones, Mail,
-  Menu, Send, ShieldCheck, Smartphone, Wallet, X
-} from "lucide-react";
-import heroFootball from "./assets/hero-football.webp";
+import { ArrowUpRight, ShieldCheck, Zap, Headphones, Wallet, Globe2, BadgeCheck, ChevronDown, Menu, X, Mail, Send, CheckCircle2 } from "lucide-react";
 import "./styles.css";
 
 const config = {
   supportEmail: "team@YOUR-DOMAIN.com",
   telegramUrl: "https://t.me/YOUR_SUPPORT_USERNAME",
-  formEndpoint: "" // Add a secure form endpoint before launch.
+  formEndpoint: "" // Add a secure form endpoint (e.g. Formspree) before launch.
 };
 
 const faqs = [
-  ["What is an E-Wallet Agent?", "An E-Wallet Agent supports payment-related transactions under an approved operator's procedures. Confirm duties, eligibility, and terms with the authorized team."],
-  ["How do I apply?", "Complete the application form with accurate contact details. The team can contact you to explain eligibility and the review process."],
+  ["What is an E-Wallet Agent?", "An E-Wallet Agent supports payment-related transactions under an approved operator's procedures. Specific duties, eligibility, and terms must be confirmed with the authorized team."],
+  ["How do I apply?", "Complete the application form with accurate contact details. The team can contact you to explain eligibility and the verification process."],
   ["Is approval guaranteed?", "No. Applications are reviewed and approval is subject to verification, applicable laws, and the operator's requirements."],
   ["What information should I provide?", "Provide only the requested contact details. Do not submit passwords, OTPs, bank PINs, or payment credentials through this form."],
-  ["Where can I read the terms?", "Review the Terms and Privacy Policy before using any linked service. Availability and eligibility can vary by location."]
+  ["Where can I read the terms?", "Review the Terms, Privacy Policy, and responsible-gambling information before using any linked service."]
 ];
 
 function App() {
@@ -47,7 +43,7 @@ function App() {
     try {
       const res = await fetch(config.formEndpoint, {
         method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
         body: JSON.stringify(form)
       });
       if (!res.ok) throw new Error("Unable to submit right now. Please try again later.");
@@ -64,110 +60,106 @@ function App() {
         <a className="brand" href="#home" aria-label="Asian Hub home"><span>ASIAN</span><b>HUB</b></a>
         <button className="mobile-menu" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu">{menuOpen ? <X/> : <Menu/>}</button>
         <nav className={menuOpen ? "nav open" : "nav"}>
-          <button onClick={() => jump("about")}>About us</button>
-          <button onClick={() => jump("working")}>Working with Us</button>
-          <button onClick={() => jump("solutions")}>Solutions</button>
+          <button onClick={() => jump("home")}>Home</button>
+          <button onClick={() => jump("platforms")}>Games &amp; Sports</button>
+          <button onClick={() => jump("agent")}>E-Wallet Agent</button>
+          <button onClick={() => jump("steps")}>How to Apply</button>
           <button onClick={() => jump("faq")}>FAQ</button>
-          <button onClick={() => jump("contact")}>Contacts</button>
+          <button onClick={() => jump("contact")}>Contact</button>
         </nav>
-        <button className="nav-cta" onClick={() => jump("application")}>BECOME AN AGENT <ArrowUpRight size={16}/></button>
+        <button className="nav-cta" onClick={() => jump("agent")}>Get Started <ArrowUpRight size={16}/></button>
       </header>
 
       <main>
         <section className="hero" id="home">
-          <div className="hero-content">
-            <span className="eyebrow"><span className="pulse"/> ASIAN HUB · AGENT PROGRAM</span>
-            <h1>Build your next opportunity with <em>Games &amp; Sports.</em></h1>
-            <p>Explore our agent information, understand the process, and talk with the team about eligibility and next steps.</p>
+          <div className="hero-bg-glow"></div>
+          <div className="hero-copy">
+            <div className="eyebrow"><span className="pulse"></span> GAMES &amp; SPORTS <i/> E-WALLET AGENT</div>
+            <h1>One hub.<br/>Clear choices.<br/><em>New opportunities.</em></h1>
+            <p>Explore games and sports information, and learn about E-Wallet Agent opportunities. Review the details, eligibility, and terms before proceeding.</p>
             <div className="hero-actions">
-              <button className="btn primary" onClick={() => jump("application")}>BECOME AN AGENT <ArrowUpRight size={17}/></button>
-              <button className="btn outline" onClick={() => jump("working")}>WORKING WITH US</button>
+              <button className="btn primary" onClick={() => jump("platforms")}>Explore Games &amp; Sports <ArrowUpRight size={17}/></button>
+              <button className="btn secondary" onClick={() => jump("agent")}>Become an E-Wallet Agent</button>
             </div>
-            <div className="hero-pills"><span><Smartphone/> Mobile-friendly process</span><span><ShieldCheck/> Terms reviewed up front</span></div>
+            <div className="trust-row"><span><ShieldCheck/> Clear information</span><span><Zap/> Simple process</span><span><Headphones/> Support contact</span></div>
           </div>
-          <img className="hero-backdrop" src={heroFootball} alt="Football player on a stadium pitch" />
-        </section>
-
-        <section className="stats-wrap" id="about">
-          <div className="stats-card">
-            <div className="stat"><strong>Games</strong><small>GUIDES &amp; CATEGORIES</small></div>
-            <div className="stat"><strong>Sports</strong><small>EVENT INFORMATION</small></div>
-            <div className="stat"><strong>Agent</strong><small>PROGRAM OVERVIEW</small></div>
-            <div className="stat"><strong>Support</strong><small>APPLICATION HELP</small></div>
+          <div className="hero-art" aria-label="Abstract digital wallet illustration">
+            <div className="orbit orbit-one"></div><div className="orbit orbit-two"></div>
+            <div className="glow-card"><div className="card-top"><span>ASIAN HUB</span><span className="chip"></span></div><div className="card-wallet"><Wallet size={68}/></div><div className="card-bottom"><span>Digital wallet</span><b>•••• 2048</b></div></div>
+            <div className="coin coin-a">A</div><div className="coin coin-b">✦</div><div className="spark spark-a"></div><div className="spark spark-b"></div>
           </div>
         </section>
 
-        <section className="process section" id="working">
-          <div className="process-copy">
-            <span className="kicker">WORKING WITH US</span>
-            <h2>A clear path to <em>get started.</em></h2>
-            <p>Learn what the role involves, share your contact details, and speak with the team before making a decision.</p>
-          </div>
-          <div className="process-list">
-            {[["01", "Send an inquiry", "Tell us how to reach you and what you would like to know."], ["02", "Review the details", "Discuss eligibility, responsibilities, and applicable terms with the team."], ["03", "Decide your next step", "If approved, follow the official onboarding instructions."]].map(([n, title, copy]) => (
-              <article className="process-row" key={n}><strong>{n}</strong><span className="process-rule"/><div><h3>{title}</h3><p>{copy}</p></div></article>
-            ))}
-          </div>
-        </section>
-
-        <section className="advantages section">
-          <div className="section-heading light-heading"><span className="kicker">WHY ASIAN HUB</span><h2>Useful support at <em>every step.</em></h2></div>
-          <div className="advantage-grid">
-            <article><Wallet/><h3>Clear role</h3><p>Understand responsibilities and requirements before applying.</p></article>
-            <article><BadgeCheck/><h3>Guided review</h3><p>Get information about the review process from the support team.</p></article>
-            <article><Headphones/><h3>Direct support</h3><p>Ask questions and get help with the next steps.</p></article>
-            <article><ShieldCheck/><h3>Terms first</h3><p>Review eligibility and local requirements before proceeding.</p></article>
+        <section className="platforms section" id="platforms">
+          <div className="section-heading"><span className="kicker">GAMES &amp; SPORTS</span><h2>Explore <em>Games and Sports</em></h2><p>Find information about popular games and sports, and learn about the E-Wallet Agent application process.</p></div>
+          <div className="platform-grid">
+            <article className="platform-card">
+              <div className="platform-brand"><span className="brand-word">GAMES</span><span className="platform-tag">GAME GUIDE</span></div>
+              <p>Explore game categories, learn how they work, and review the rules before you play.</p>
+              <ul><li><CheckCircle2/> Game information</li><li><CheckCircle2/> Rules and formats</li><li><CheckCircle2/> Play responsibly</li></ul>
+            </article>
+            <article className="platform-card">
+              <div className="platform-brand"><span className="brand-word">SPORTS</span><span className="platform-tag">SPORTS GUIDE</span></div>
+              <p>Explore sports and competitions, with useful context for fans and visitors.</p>
+              <ul><li><CheckCircle2/> Sports overview</li><li><CheckCircle2/> Competition formats</li><li><CheckCircle2/> Latest information</li></ul>
+            </article>
           </div>
         </section>
 
-        <section className="who section">
-          <div className="who-copy"><span className="kicker">WHO CAN APPLY</span><h2>Is this right <em>for you?</em></h2>
-            <ul className="check-list"><li><Check/> Adults interested in Games &amp; Sports communities</li><li><Check/> People who value clear rules and communication</li><li><Check/> Applicants ready to complete a verification process</li></ul>
-            <button className="btn primary" onClick={() => jump("application")}>START AN APPLICATION <ArrowUpRight size={17}/></button>
+        <section className="agent-section section" id="agent">
+          <div className="agent-visual"><div className="wallet-illustration"><div className="wallet-screen"><Wallet size={52}/><b>E-WALLET</b><small>AGENT PROGRAM</small></div><div className="wallet-base"></div><div className="floating-token token-one">A</div><div className="floating-token token-two">↗</div></div></div>
+          <div className="agent-copy">
+            <span className="kicker">E-WALLET AGENT</span>
+            <h2>Build your next step with <em>clear information.</em></h2>
+            <p>Learn about the E-Wallet Agent application process, review the requirements, and contact the team for details. Acceptance is subject to verification and applicable rules.</p>
+            <div className="benefits">
+              <div><span><Wallet/></span><b>Defined role</b><small>Understand responsibilities and requirements.</small></div>
+              <div><span><BadgeCheck/></span><b>Review process</b><small>Applications are subject to verification.</small></div>
+              <div><span><Headphones/></span><b>Support contact</b><small>Ask questions before applying.</small></div>
+              <div><span><ShieldCheck/></span><b>Clear terms</b><small>Review conditions before proceeding.</small></div>
+            </div>
+            <button className="btn primary" onClick={() => jump("application")}>Apply for E-Wallet Agent <ArrowUpRight size={17}/></button>
           </div>
-          <div className="who-visual"><div className="who-panel"><span className="who-panel-label">BEFORE YOU APPLY</span><h3>Know the role.<br/>Review the terms.</h3><p>Eligibility and availability may vary by location.</p><div><ShieldCheck/><span>Verify details with the authorized team.</span></div></div></div>
         </section>
 
-        <section className="solutions section" id="solutions">
-          <div className="section-heading"><span className="kicker">OUR SOLUTIONS</span><h2>Explore what <em>we offer.</em></h2><p>Start with the information that best matches your interests.</p></div>
-          <div className="solution-grid">
-            <article className="solution-card"><span className="solution-icon">G</span><span className="solution-label">01 / GAMES</span><h3>Games guide</h3><p>Learn about game categories, formats, and responsible play.</p><button onClick={() => jump("faq")}>Explore details <ArrowUpRight size={16}/></button></article>
-            <article className="solution-card featured"><span className="solution-icon">S</span><span className="solution-label">02 / SPORTS</span><h3>Sports guide</h3><p>Find useful context about sports, competitions, and schedules.</p><button onClick={() => jump("faq")}>Explore details <ArrowUpRight size={16}/></button></article>
-            <article className="solution-card"><span className="solution-icon">A</span><span className="solution-label">03 / SUPPORT</span><h3>E-Wallet Agent</h3><p>Review the application process and ask the team about the role.</p><button onClick={() => jump("application")}>Apply now <ArrowUpRight size={16}/></button></article>
+        <section className="steps section" id="steps">
+          <div className="section-heading"><span className="kicker">HOW TO APPLY</span><h2>Four <em>simple steps</em></h2><p>Take time to understand the role and provide accurate information.</p></div>
+          <div className="steps-grid">
+            {[["01","Understand the role","Read the responsibilities, requirements, and terms."],["02","Complete the form","Provide accurate contact details in the application form."],["03","Verification","The team may contact you to explain the review process."],["04","Next steps","If approved, follow the official onboarding instructions."]].map(([n,t,d])=><article className="step-card" key={n}><span className="step-num">{n}</span><h3>{t}</h3><p>{d}</p></article>)}
           </div>
         </section>
 
         <section className="application section" id="application">
-          <div className="section-heading"><span className="kicker">GET IN TOUCH</span><h2>Start your <em>application.</em></h2><p>Share your contact information and the team can explain the next steps.</p></div>
+          <div className="section-heading"><span className="kicker">APPLICATION</span><h2>Start your <em>application</em></h2><p>Fill in the form below. Required fields are marked with an asterisk.</p></div>
           <div className="form-wrap">
-            {submitted ? <div className="success"><BadgeCheck size={44}/><h3>Application submitted</h3><p>Your details have been received. The team may contact you using the information provided.</p></div> : <form onSubmit={handleSubmit}>
+            {submitted ? <div className="success"><CheckCircle2 size={42}/><h3>Application submitted</h3><p>Your details have been received. The team may contact you using the information provided.</p></div> : <form onSubmit={handleSubmit}>
               <div className="form-grid">
-                <label>Full name *<input value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} placeholder="Your full name" required /></label>
-                <label>Country *<input value={form.country} onChange={e => setForm({ ...form, country: e.target.value })} placeholder="Your country" required /></label>
-                <label>Email *<input type="email" value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} placeholder="you@example.com" required /></label>
-                <label>Phone *<input type="tel" value={form.phone} onChange={e => setForm({ ...form, phone: e.target.value })} placeholder="Mobile number with country code" required /></label>
-                <fieldset className="contact-choice"><legend>Preferred contact method *</legend><label><input type="radio" name="method" checked={form.contactMethod === "Telegram"} onChange={() => setForm({ ...form, contactMethod: "Telegram" })}/> Telegram</label><label><input type="radio" name="method" checked={form.contactMethod === "Other"} onChange={() => setForm({ ...form, contactMethod: "Other" })}/> Other</label></fieldset>
-                <label className="wide">Telegram username / preferred contact *<input value={form.telegram} onChange={e => setForm({ ...form, telegram: e.target.value })} placeholder="@username or contact details" required /></label>
+                <label>Full name *<input value={form.name} onChange={e=>setForm({...form,name:e.target.value})} placeholder="Your full name" required /></label>
+                <label>Country *<input value={form.country} onChange={e=>setForm({...form,country:e.target.value})} placeholder="Your country" required /></label>
+                <label>Email *<input type="email" value={form.email} onChange={e=>setForm({...form,email:e.target.value})} placeholder="you@example.com" required /></label>
+                <label>Phone *<input type="tel" value={form.phone} onChange={e=>setForm({...form,phone:e.target.value})} placeholder="Mobile number with country code" required /></label>
+                <fieldset className="contact-choice"><legend>Preferred contact method *</legend><label><input type="radio" name="method" checked={form.contactMethod==="Telegram"} onChange={()=>setForm({...form,contactMethod:"Telegram"})}/> Telegram</label><label><input type="radio" name="method" checked={form.contactMethod==="Other"} onChange={()=>setForm({...form,contactMethod:"Other"})}/> Other</label></fieldset>
+                <label className="wide">Telegram username / preferred contact *<input value={form.telegram} onChange={e=>setForm({...form,telegram:e.target.value})} placeholder="@username or contact details" required /></label>
               </div>
               <p className="form-note"><ShieldCheck size={16}/> Do not submit passwords, OTPs, bank PINs, or payment credentials.</p>
               {error && <p className="form-error" role="alert">{error}</p>}
-              <button className="btn primary submit-btn" type="submit">SEND APPLICATION <ArrowUpRight size={17}/></button>
+              <button className="btn primary submit-btn" type="submit">Submit Application <ArrowUpRight size={17}/></button>
               <p className="privacy-note">By submitting, you confirm that the information is accurate and acknowledge the Privacy Policy.</p>
             </form>}
           </div>
         </section>
 
         <section className="faq section" id="faq">
-          <div className="section-heading"><span className="kicker">FAQ</span><h2>Frequently asked <em>questions.</em></h2></div>
-          <div className="faq-layout"><div className="faq-list">{faqs.map(([q, a], i) => <div className="faq-item" key={q}><button onClick={() => setOpenFaq(openFaq === i ? -1 : i)} aria-expanded={openFaq === i}>{q}<ChevronDown className={openFaq === i ? "rotated" : ""}/></button>{openFaq === i && <p>{a}</p>}</div>)}</div>
-            <aside className="contact-card" id="contact"><span className="contact-icon"><CircleHelp/></span><h3>Need more details?</h3><p>Contact the support team with questions about the application process.</p><a className="btn primary full" href={config.telegramUrl} target="_blank" rel="noopener noreferrer"><Send size={16}/> CONTACT ON TELEGRAM</a><a className="btn secondary full" href={`mailto:${config.supportEmail}`}><Mail size={16}/> SEND AN EMAIL</a></aside>
+          <div className="section-heading"><span className="kicker">FAQ</span><h2>Frequently asked <em>questions</em></h2></div>
+          <div className="faq-layout"><div className="faq-list">{faqs.map(([q,a],i)=><div className="faq-item" key={q}><button onClick={()=>setOpenFaq(openFaq===i?-1:i)} aria-expanded={openFaq===i}>{q}<ChevronDown className={openFaq===i?"rotated":""}/></button>{openFaq===i&&<p>{a}</p>}</div>)}</div>
+            <aside className="contact-card" id="contact"><span className="contact-icon"><Headphones/></span><h3>Still have questions?</h3><p>Contact the support team for information about the application process.</p><a className="btn primary full" href={config.telegramUrl} target="_blank" rel="noopener noreferrer"><Send size={16}/> Contact on Telegram</a><a className="btn secondary full" href={`mailto:${config.supportEmail}`}><Mail size={16}/> Send an email</a></aside>
           </div>
         </section>
       </main>
 
       <footer className="footer">
-        <div className="footer-main"><div className="footer-about"><a className="brand" href="#home"><span>ASIAN</span><b>HUB</b></a><p>Games, sports, and E-Wallet Agent information.</p></div><div><h4>Explore</h4><button onClick={() => jump("solutions")}>Solutions</button><button onClick={() => jump("working")}>Working with Us</button><button onClick={() => jump("faq")}>FAQ</button></div><div><h4>Information</h4><a href="/terms.html">Terms &amp; Conditions</a><a href="/privacy.html">Privacy Policy</a><a href="#responsible">Responsible Play</a></div><div><h4>Contacts</h4><a href={`mailto:${config.supportEmail}`}><Mail size={15}/> {config.supportEmail}</a><a href={config.telegramUrl} target="_blank" rel="noopener noreferrer"><Send size={15}/> Telegram Support</a></div></div>
-        <div className="footer-bottom"><span>© {new Date().getFullYear()} Asian Hub. All rights reserved.</span><span>Asian Hub is an independent affiliate information site, not a service operator.</span></div>
+        <div className="footer-main"><div className="footer-about"><a className="brand" href="#home"><span>ASIAN</span><b>HUB</b></a><p>Games, sports, and E-Wallet Agent information.</p></div><div><h4>Explore</h4><button onClick={()=>jump("platforms")}>Games &amp; Sports</button><button onClick={()=>jump("agent")}>E-Wallet Agent</button><button onClick={()=>jump("faq")}>FAQ</button><button onClick={()=>jump("contact")}>Contact</button></div><div><h4>Information</h4><a href="/terms.html">Terms & Conditions</a><a href="/privacy.html">Privacy Policy</a><a href="#responsible">Responsible Play</a></div><div><h4>Contact</h4><a href={`mailto:${config.supportEmail}`}><Mail size={15}/> {config.supportEmail}</a><a href={config.telegramUrl} target="_blank" rel="noopener noreferrer"><Send size={15}/> Telegram Support</a></div></div>
+        <div className="footer-bottom"><span>© {new Date().getFullYear()} Asian Hub. All rights reserved.</span><span>18+ · Gambling can be harmful. Only use services where legal and permitted.</span></div>
         <div className="hidden-anchors"><span id="responsible">Responsible play: Set limits and seek help if play causes harm.</span></div>
       </footer>
     </div>
