@@ -4,6 +4,7 @@ import {
   ArrowUpRight, BadgeCheck, Check, ChevronDown, CircleHelp, Headphones, Mail,
   Menu, Send, ShieldCheck, Smartphone, Wallet, X
 } from "lucide-react";
+import heroFootball from "./assets/hero-football.webp";
 import "./styles.css";
 
 const config = {
@@ -84,14 +85,7 @@ function App() {
             </div>
             <div className="hero-pills"><span><Smartphone/> Mobile-friendly process</span><span><ShieldCheck/> Terms reviewed up front</span></div>
           </div>
-          <div className="hero-visual" aria-label="Asian Hub games, sports, and agent program information">
-            <div className="visual-frame">
-              <div className="visual-topline"><span>ASIAN HUB</span><small>GAMES &amp; SPORTS PROGRAM</small></div>
-              <div className="visual-main"><span className="visual-index">INFORMATION / 01</span><strong>Clear details.<br/>A confident<br/><em>next step.</em></strong><div className="visual-rule"/><div className="visual-tags"><span>GAMES</span><span>SPORTS</span><span>AGENT SUPPORT</span></div></div>
-              <div className="visual-footer"><span>ASIAN HUB · AGENT PROGRAM</span><span>EXPLORE <ArrowUpRight size={15}/></span></div>
-            </div>
-            <div className="visual-stamp">AH<br/><span>01</span></div>
-          </div>
+          <img className="hero-backdrop" src={heroFootball} alt="Football player on a stadium pitch" />
         </section>
 
         <section className="stats-wrap" id="about">
