@@ -35,15 +35,25 @@ function App() {
       return;
     }
     try {
-      const payload = new FormData();
-      Object.entries(form).forEach(([key, value]) => payload.append(`data[${key}]`, value));
-      payload.append("data[submittedAt]", new Date().toISOString());
+      const payload = {
+        data: [{ ...form, submittedAt: new Date().toISOString() }]
+      };
       const res = await fetch(config.formEndpoint, {
         method: "POST",
-        body: payload
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
       });
-      const result = await res.json();
-      if (!res.ok || !result.created) throw new Error("Unable to submit right now. Please try again later.");
+      const responseText = await res.text();
+      let result = {};
+      try {
+        result = responseText ? JSON.parse(responseText) : {};
+      } catch {
+        result = {};
+      }
+      if (!res.ok || !result.created) {
+        const detail = result.error || result.message;
+        throw new Error(detail || `Could not submit (HTTP ${res.status}). Please check the SheetDB settings and spreadsheet column headers.`);
+      }
       setSubmitted(true);
       setForm({ name: "", country: "", email: "", phone: "", contactMethod: "Telegram", telegram: "" });
     } catch (err) {
