@@ -44,3 +44,4 @@ em{color:#349fe6}
 .footer{background:#080f1b;border-color:#20324a}
 .footer-bottom{border-color:#20324a}
 @media(max-width:680px){.nav{background:#0b1526;border-color:#263951}}
+.faq-list{max-width:900px;width:100%;margin:0 auto}

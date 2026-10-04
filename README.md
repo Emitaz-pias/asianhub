@@ -15,17 +15,16 @@ npm run build
 The production build is created in `dist/`.
 
 ## Deploy
-- **Netlify:** Build command `npm run build`, publish directory `dist`.
+- **Netlify:** `netlify.toml` sets build command `npm run build` and publish directory `dist`.
 - **Vercel:** Framework preset Vite, build command `npm run build`, output directory `dist`.
 - **Static hosting/VPS:** Upload the contents of `dist/` to your web root.
 
 ## Before launch
 1. Review applicable local rules before publishing games or sports information.
-2. Replace the placeholder support email and Telegram URL in `src/main.jsx`.
-3. The form is intentionally in preview mode. To receive submissions, configure a secure form endpoint in `config.formEndpoint` and ensure your privacy notice describes collection, use, retention, and contact details. Do not collect passwords, OTPs, PINs, or payment credentials.
-4. Replace placeholder policy pages with reviewed, jurisdiction-appropriate Terms and Privacy Policy.
-5. Review any third-party names, images, or content before publishing them.
+2. Form submissions are sent through SheetDB to the connected Google Sheet. Restrict the API to Create (POST), set the allowed CORS origin to `https://asianretailhub.com`, and keep the Sheet private. The public frontend exposes the API URL, so CORS alone does not block direct API calls.
+3. Review the Terms and Privacy pages against the actual data handling, retention period, contact process, and laws relevant to the site's audience.
+4. Review any third-party names, images, or content before publishing them.
 
 ## Domain
-Domain availability for `asianhub.com` has not been confirmed. Check with a registrar before purchasing. A domain being available does not establish trademark rights.
+The site owner selected `asianretailhub.com`. Configure the custom domain and DNS records in Netlify before expecting that address to serve the site.
 # asianhub

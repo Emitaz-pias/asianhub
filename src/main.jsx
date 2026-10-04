@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import { createRoot } from "react-dom/client";
-import { ArrowUpRight, ShieldCheck, Zap, Headphones, Wallet, Globe2, BadgeCheck, ChevronDown, Menu, X, Mail, Send, CheckCircle2 } from "lucide-react";
+import { ArrowUpRight, ShieldCheck, Zap, Headphones, Wallet, BadgeCheck, ChevronDown, Menu, X, CheckCircle2 } from "lucide-react";
 import "./styles.css";
 
 const config = {
-  supportEmail: "team@YOUR-DOMAIN.com",
-  telegramUrl: "https://t.me/YOUR_SUPPORT_USERNAME",
-  formEndpoint: "" // Add a secure form endpoint (e.g. Formspree) before launch.
+  formEndpoint: "https://sheetdb.io/api/v1/2vhztxt9mef6e"
 };
 
 const faqs = [
@@ -36,17 +34,16 @@ function App() {
       setError("Please complete all required fields.");
       return;
     }
-    if (!config.formEndpoint) {
-      setError("The application form is in preview mode. The site owner must connect a secure form endpoint before accepting applications.");
-      return;
-    }
     try {
+      const payload = new FormData();
+      Object.entries(form).forEach(([key, value]) => payload.append(`data[${key}]`, value));
+      payload.append("data[submittedAt]", new Date().toISOString());
       const res = await fetch(config.formEndpoint, {
         method: "POST",
-        headers: { "Content-Type": "application/json", "Accept": "application/json" },
-        body: JSON.stringify(form)
+        body: payload
       });
-      if (!res.ok) throw new Error("Unable to submit right now. Please try again later.");
+      const result = await res.json();
+      if (!res.ok || !result.created) throw new Error("Unable to submit right now. Please try again later.");
       setSubmitted(true);
       setForm({ name: "", country: "", email: "", phone: "", contactMethod: "Telegram", telegram: "" });
     } catch (err) {
@@ -65,7 +62,7 @@ function App() {
           <button onClick={() => jump("agent")}>E-Wallet Agent</button>
           <button onClick={() => jump("steps")}>How to Apply</button>
           <button onClick={() => jump("faq")}>FAQ</button>
-          <button onClick={() => jump("contact")}>Contact</button>
+          <button onClick={() => jump("application")}>Apply</button>
         </nav>
         <button className="nav-cta" onClick={() => jump("agent")}>Get Started <ArrowUpRight size={16}/></button>
       </header>
@@ -144,21 +141,19 @@ function App() {
               <p className="form-note"><ShieldCheck size={16}/> Do not submit passwords, OTPs, bank PINs, or payment credentials.</p>
               {error && <p className="form-error" role="alert">{error}</p>}
               <button className="btn primary submit-btn" type="submit">Submit Application <ArrowUpRight size={17}/></button>
-              <p className="privacy-note">By submitting, you confirm that the information is accurate and acknowledge the Privacy Policy.</p>
+              <p className="privacy-note">Your details are sent through SheetDB and stored in Google Sheets. See the Privacy Policy before submitting.</p>
             </form>}
           </div>
         </section>
 
         <section className="faq section" id="faq">
           <div className="section-heading"><span className="kicker">FAQ</span><h2>Frequently asked <em>questions</em></h2></div>
-          <div className="faq-layout"><div className="faq-list">{faqs.map(([q,a],i)=><div className="faq-item" key={q}><button onClick={()=>setOpenFaq(openFaq===i?-1:i)} aria-expanded={openFaq===i}>{q}<ChevronDown className={openFaq===i?"rotated":""}/></button>{openFaq===i&&<p>{a}</p>}</div>)}</div>
-            <aside className="contact-card" id="contact"><span className="contact-icon"><Headphones/></span><h3>Still have questions?</h3><p>Contact the support team for information about the application process.</p><a className="btn primary full" href={config.telegramUrl} target="_blank" rel="noopener noreferrer"><Send size={16}/> Contact on Telegram</a><a className="btn secondary full" href={`mailto:${config.supportEmail}`}><Mail size={16}/> Send an email</a></aside>
-          </div>
+          <div className="faq-list">{faqs.map(([q,a],i)=><div className="faq-item" key={q}><button onClick={()=>setOpenFaq(openFaq===i?-1:i)} aria-expanded={openFaq===i}>{q}<ChevronDown className={openFaq===i?"rotated":""}/></button>{openFaq===i&&<p>{a}</p>}</div>)}</div>
         </section>
       </main>
 
       <footer className="footer">
-        <div className="footer-main"><div className="footer-about"><a className="brand" href="#home"><span>ASIAN</span><b>HUB</b></a><p>Games, sports, and E-Wallet Agent information.</p></div><div><h4>Explore</h4><button onClick={()=>jump("platforms")}>Games &amp; Sports</button><button onClick={()=>jump("agent")}>E-Wallet Agent</button><button onClick={()=>jump("faq")}>FAQ</button><button onClick={()=>jump("contact")}>Contact</button></div><div><h4>Information</h4><a href="/terms.html">Terms & Conditions</a><a href="/privacy.html">Privacy Policy</a><a href="#responsible">Responsible Play</a></div><div><h4>Contact</h4><a href={`mailto:${config.supportEmail}`}><Mail size={15}/> {config.supportEmail}</a><a href={config.telegramUrl} target="_blank" rel="noopener noreferrer"><Send size={15}/> Telegram Support</a></div></div>
+        <div className="footer-main"><div className="footer-about"><a className="brand" href="#home"><span>ASIAN</span><b>HUB</b></a><p>Games, sports, and E-Wallet Agent information.</p></div><div><h4>Explore</h4><button onClick={()=>jump("platforms")}>Games &amp; Sports</button><button onClick={()=>jump("agent")}>E-Wallet Agent</button><button onClick={()=>jump("faq")}>FAQ</button><button onClick={()=>jump("application")}>Apply</button></div><div><h4>Information</h4><a href="/terms.html">Terms & Conditions</a><a href="/privacy.html">Privacy Policy</a><a href="/responsible.html">Responsible Play</a></div><div><h4>Application</h4><button onClick={()=>jump("application")}>Submit an application</button><button onClick={()=>jump("steps")}>How to Apply</button></div></div>
         <div className="footer-bottom"><span>© {new Date().getFullYear()} Asian Hub. All rights reserved.</span><span>18+ · Gambling can be harmful. Only use services where legal and permitted.</span></div>
         <div className="hidden-anchors"><span id="responsible">Responsible play: Set limits and seek help if play causes harm.</span></div>
       </footer>
