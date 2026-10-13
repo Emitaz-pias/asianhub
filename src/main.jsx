@@ -23,7 +23,12 @@ function App() {
   const [form, setForm] = useState({ name: "", country: "", email: "", phone: "", contactMethod: "Telegram", telegram: "" });
 
   const jump = (id) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    const target = document.getElementById(id);
+    if (target) {
+      const headerHeight = document.querySelector(".topbar")?.getBoundingClientRect().height || 0;
+      const top = window.scrollY + target.getBoundingClientRect().top - headerHeight - 12;
+      window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+    }
     setMenuOpen(false);
   };
 
@@ -74,7 +79,7 @@ function App() {
           <button onClick={() => jump("faq")}>FAQ</button>
           <button onClick={() => jump("application")}>Apply</button>
         </nav>
-        <button className="nav-cta" onClick={() => jump("agent")}>Get Started <ArrowUpRight size={16}/></button>
+        <button className="nav-cta" onClick={() => jump("application")}>Get Started <ArrowUpRight size={16}/></button>
       </header>
 
       <main>
@@ -86,7 +91,7 @@ function App() {
             <p>Explore games and sports information, and learn about E-Wallet Agent opportunities. Review the details, eligibility, and terms before proceeding.</p>
             <div className="hero-actions">
               <button className="btn primary" onClick={() => jump("platforms")}>Explore Games &amp; Sports <ArrowUpRight size={17}/></button>
-              <button className="btn secondary" onClick={() => jump("agent")}>Become an E-Wallet Agent</button>
+              <button className="btn secondary" onClick={() => jump("application")}>Become an E-Wallet Agent</button>
             </div>
             <div className="trust-row"><span><ShieldCheck/> Clear information</span><span><Zap/> Simple process</span><span><Headphones/> Support contact</span></div>
           </div>
