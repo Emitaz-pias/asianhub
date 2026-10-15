@@ -8,10 +8,12 @@ const config = {
 };
 
 const faqs = [
-  ["What is an E-Wallet Agent?", "An E-Wallet Agent supports payment-related transactions under an approved operator's procedures. Specific duties, eligibility, and terms must be confirmed with the authorized team."],
-  ["How do I apply?", "Complete the application form with accurate contact details. The team can contact you to explain eligibility and the verification process."],
+  ["What is an E-Wallet Agent?", "An e-wallet or digital wallet agent supports payment-related services under an approved provider's procedures. Duties, eligibility, and terms must be confirmed with the relevant provider."],
+  ["How do I register for an e-wallet agent job?", "Use the application form to submit an e-wallet agent registration request. Asian Hub reviews applications for possible e-wallet agent recruitment or payment agent jobs; submitting a form does not guarantee a job or placement."],
   ["Is approval guaranteed?", "No. Applications are reviewed and approval is subject to verification, applicable laws, and the operator's requirements."],
   ["What information should I provide?", "Provide only the requested contact details. Do not submit passwords, OTPs, bank PINs, or payment credentials through this form."],
+  ["Can I open an e-wallet account or get customer support here?", "No. Asian Hub is not an online wallet service and does not open e-wallet or digital wallet accounts, handle account registration, or provide e-wallet customer support. Contact your wallet provider through its official channels for account help."],
+  ["What kinds of roles can I apply for?", "You can submit an inquiry about an online payment agent opportunity, e-wallet agent job, or payment service agent job. Available roles and requirements depend on the provider and your location."],
   ["Where can I read the terms?", "Review the Terms, Privacy Policy, and responsible-gambling information before using any linked service."]
 ];
 
@@ -87,8 +89,8 @@ function App() {
           <div className="hero-bg-glow"></div>
           <div className="hero-copy">
             <div className="eyebrow"><span className="pulse"></span> GAMES &amp; SPORTS <i/> E-WALLET AGENT</div>
-            <h1>One hub.<br/>Clear choices.<br/><em>New opportunities.</em></h1>
-            <p>Explore games and sports information, and learn about E-Wallet Agent opportunities. Review the details, eligibility, and terms before proceeding.</p>
+            <h1>E-Wallet Agent<br/><em>Jobs &amp; Registration</em></h1>
+            <p>Explore e-wallet agent recruitment, payment agent jobs, and digital wallet agent opportunities. Asian Hub accepts applications for consideration; roles, approval, and earnings are not guaranteed.</p>
             <div className="hero-actions">
               <button className="btn primary" onClick={() => jump("platforms")}>Explore Games &amp; Sports <ArrowUpRight size={17}/></button>
               <button className="btn secondary" onClick={() => jump("application")}>Become an E-Wallet Agent</button>
@@ -122,8 +124,8 @@ function App() {
           <div className="agent-visual"><div className="wallet-illustration"><div className="wallet-screen"><Wallet size={52}/><b>E-WALLET</b><small>AGENT PROGRAM</small></div><div className="wallet-base"></div><div className="floating-token token-one">A</div><div className="floating-token token-two">↗</div></div></div>
           <div className="agent-copy">
             <span className="kicker">E-WALLET AGENT</span>
-            <h2>Build your next step with <em>clear information.</em></h2>
-            <p>Learn about the E-Wallet Agent application process, review the requirements, and contact the team for details. Acceptance is subject to verification and applicable rules.</p>
+            <h2>Explore <em>payment agent opportunities.</em></h2>
+            <p>Learn about e-wallet agent jobs, payment service agent jobs, and the e-wallet agent registration process. Submit an application for review; eligibility and availability depend on the provider and local rules.</p>
             <div className="benefits">
               <div><span><Wallet/></span><b>Defined role</b><small>Understand responsibilities and requirements.</small></div>
               <div><span><BadgeCheck/></span><b>Review process</b><small>Applications are subject to verification.</small></div>
@@ -142,7 +144,7 @@ function App() {
         </section>
 
         <section className="application section" id="application">
-          <div className="section-heading"><span className="kicker">APPLICATION</span><h2>Start your <em>application</em></h2><p>Fill in the form below. Required fields are marked with an asterisk.</p></div>
+          <div className="section-heading"><span className="kicker">E-WALLET AGENT REGISTRATION</span><h2>Apply for an <em>agent opportunity</em></h2><p>Submit your details to be considered for an e-wallet or online payment agent opportunity. Required fields are marked with an asterisk.</p></div>
           <div className="form-wrap">
             {submitted ? <div className="success"><CheckCircle2 size={42}/><h3>Application submitted</h3><p>Your details have been received. The team may contact you using the information provided.</p></div> : <form onSubmit={handleSubmit}>
               <div className="form-grid">
@@ -163,6 +165,7 @@ function App() {
 
         <section className="faq section" id="faq">
           <div className="section-heading"><span className="kicker">FAQ</span><h2>Frequently asked <em>questions</em></h2></div>
+          <p className="faq-intro">Looking to open an e-wallet account, complete e-wallet registration, or find an online wallet service? Asian Hub does not provide account opening or customer support. This site shares information about agent opportunities and accepts agent applications only. For a digital wallet account or account help, contact the wallet provider directly.</p>
           <div className="faq-list">{faqs.map(([q,a],i)=><div className="faq-item" key={q}><button onClick={()=>setOpenFaq(openFaq===i?-1:i)} aria-expanded={openFaq===i}>{q}<ChevronDown className={openFaq===i?"rotated":""}/></button>{openFaq===i&&<p>{a}</p>}</div>)}</div>
         </section>
       </main>
