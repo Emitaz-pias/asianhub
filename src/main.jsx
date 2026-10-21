@@ -15,6 +15,8 @@ const faqs = [
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [openFaq, setOpenFaq] = useState(-1);
+  const [form, setForm] = useState({ email: "", message: "", consent: false });
+  const [formState, setFormState] = useState("idle");
 
   const jump = (id) => {
     const target = document.getElementById(id);
@@ -25,6 +27,32 @@ function App() {
     }
     setMenuOpen(false);
   };
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+    if (formState === "sending") return;
+    setFormState("sending");
+    try {
+      const response = await fetch("https://sheetdb.io/api/v1/2vhztxt9mef6e", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          data: [{
+            email: form.email.trim(),
+            message: form.message.trim(),
+            consent: "yes",
+            submittedAt: new Date().toISOString(),
+          }],
+        }),
+      });
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok || Number(result.created) < 1) throw new Error("submission_failed");
+      setForm({ email: "", message: "", consent: false });
+      setFormState("sent");
+    } catch {
+      setFormState("error");
+    }
+  }
 
   return <div className="app">
     <header className="topbar">
@@ -67,7 +95,7 @@ function App() {
 
       <section className="steps section" id="steps"><div className="section-heading"><span className="kicker">HOW IT WORKS</span><h2>Join in <em>four steps</em></h2><p>This website is currently an information and interest page. No live forum, chat, events, or member benefits are promised.</p></div><div className="steps-grid">{[["01","Explore the topics","Read the community scope and rules."],["02","Choose a discussion","Sports, games, match analysis, or prediction culture."],["03","Send a message","Use the form with only the details needed to reply."],["04","Wait for a response","A request is not automatic membership or access to a live discussion space."]].map(([n,t,d])=><article className="step-card" key={n}><span className="step-num">{n}</span><h3>{t}</h3><p>{d}</p></article>)}</div></section>
 
-      <section className="application section" id="application"><div className="section-heading"><span className="kicker">JOIN / CONTACT</span><h2>Send a <em>community message</em></h2><p>Share your email so the community operators can reply, plus a short message about your interest. Required fields are marked with an asterisk.</p></div><div className="form-wrap"><form name="community-contact" method="POST" action="/success.html" data-netlify="true" netlify-honeypot="bot-field"><input type="hidden" name="form-name" value="community-contact"/><div hidden><label>Leave this field empty<input name="bot-field"/></label></div><div className="form-grid"><label>Email address *<input type="email" name="email" autoComplete="email" placeholder="you@example.com" required/></label><label className="wide">Message *<textarea name="message" rows="4" maxLength="1000" placeholder="What would you like to discuss? Please do not include sensitive information." required/></label></div><label className="consent-row"><input type="checkbox" name="consent" value="yes" required/><span>I agree that the Asian Hub community operators may use my email and message to respond to this inquiry. I have read the <a href="/privacy.html">Privacy Policy</a>.</span></label><p className="form-note"><ShieldCheck size={16}/> Never send passwords, identity documents, payment details, or private financial information.</p><button className="btn primary submit-btn" type="submit">Send message <ArrowUpRight size={17}/></button><p className="privacy-note">Your message is processed by Netlify Forms for delivery and storage. See the Privacy Policy for details.</p></form></div></section>
+      <section className="application section" id="application"><div className="section-heading"><span className="kicker">JOIN / CONTACT</span><h2>Send a <em>community message</em></h2><p>Share your email so the community operators can reply, plus a short message about your interest. Required fields are marked with an asterisk.</p></div><div className="form-wrap">{formState === "sent" ? <div className="success" role="status"><CheckCircle2 size={42}/><h3>Message received</h3><p>Your message was saved. The community operators can reply to the email address you provided. This is not automatic membership.</p></div> : <form name="community-contact" onSubmit={handleSubmit}><div className="form-grid"><label>Email address *<input type="email" name="email" autoComplete="email" placeholder="you@example.com" value={form.email} onChange={e=>setForm({...form,email:e.target.value})} required/></label><label className="wide">Message *<textarea name="message" rows="4" maxLength="1000" placeholder="What would you like to discuss? Please do not include sensitive information." value={form.message} onChange={e=>setForm({...form,message:e.target.value})} required/></label></div><label className="consent-row"><input type="checkbox" name="consent" checked={form.consent} onChange={e=>setForm({...form,consent:e.target.checked})} required/><span>I agree that the Asian Hub operators may send my email and message to SheetDB for storage in the connected Google Sheet and use them to respond to my inquiry. I have read the <a href="/privacy.html">Privacy Policy</a>.</span></label><p className="form-note"><ShieldCheck size={16}/> Never send passwords, identity documents, payment details, or private financial information.</p>{formState === "error" && <p className="form-error" role="alert">We could not send your message. Please try again later.</p>}<button className="btn primary submit-btn" type="submit" disabled={formState === "sending"}>{formState === "sending" ? "Sending…" : <>Send message <ArrowUpRight size={17}/></>}</button><p className="privacy-note">Your email and message are sent through SheetDB and stored in the community's Google Sheet. See the Privacy Policy for details.</p></form>}</div></section>
 
       <section className="faq section" id="faq"><div className="section-heading"><span className="kicker">FAQ</span><h2>Frequently asked <em>questions</em></h2></div><div className="faq-list">{faqs.map(([q,a],i)=><div className="faq-item" key={q}><button onClick={()=>setOpenFaq(openFaq===i?-1:i)} aria-expanded={openFaq===i}>{q}<ChevronDown className={openFaq===i?"rotated":""}/></button>{openFaq===i&&<p>{a}</p>}</div>)}</div></section>
     </main>

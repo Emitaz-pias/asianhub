@@ -19,8 +19,8 @@ npm run build
 
 Netlify is configured by `netlify.toml` to publish `dist/`. The static page and its React content are the same for visitors and crawlers. There are no user-agent-specific pages or redirects. `robots.txt` permits Google AdsBot crawling and `sitemap.xml` lists the public information pages.
 
-The contact form collects email, message, and required consent and is prepared for Netlify Forms. Before accepting submissions, enable Netlify Forms detection in the site dashboard, deploy, and verify the `community-contact` form is detected. Review dashboard access, notifications, spam filtering, and manual deletion. No SheetDB, Google Sheets, Google Analytics, or Google Ads tag is included.
+The contact form sends `email`, `message`, `consent`, and `submittedAt` to the SheetDB API configured in `src/main.jsx`. Set the connected sheet's first row to four separate column headers: `email`, `message`, `consent`, `submittedAt`. In the SheetDB dashboard, allow only Create (POST) for this public form endpoint; enable read/search only if there is a separate, justified need. No Google Analytics or Google Ads tag is included.
 
 No age requirement is stated on the site because none has been supplied. Confirm the intended age policy and applicable country requirements before launch. The legal/business identity of the community operators has also not been supplied; the site identifies Asian Hub as a community name and does not invent a legal entity. Contact is through the form.
 
-Before launch, verify the actual Netlify form behavior, submission storage and deletion, desktop and mobile layouts, all routes and footer links, and the deployed HTTPS domain. Send a controlled test submission only after the form has been detected, then verify and delete that test record.
+Before launch, verify the SheetDB column headers and Create (POST) permission, then submit a controlled test and verify/delete that row. Also verify submission storage and deletion, desktop and mobile layouts, all routes and footer links, and the deployed HTTPS domain.
