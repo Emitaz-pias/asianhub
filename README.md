@@ -1,6 +1,6 @@
 # Asian Hub Community
 
-An English-language sports, games, match-analysis, and prediction-culture community website for people in all countries except Bangladesh. Discussion may include betting as a topic. The website does not provide betting or gambling services, accept wagers, handle accounts or payments, recruit agents or affiliates, or promise income.
+An English-language sports and games community information website for people in all countries except Bangladesh, focused on teams, competitions, and match analysis.
 
 Asian Hub is a community name. This site does not claim that a registered company or licensed operator exists. The website currently provides information and a contact/interest form; it does not host a live forum, chat, or events.
 
