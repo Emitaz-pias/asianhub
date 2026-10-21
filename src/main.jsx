@@ -17,23 +17,20 @@ function App() {
   const [openFaq, setOpenFaq] = useState(-1);
   const [form, setForm] = useState({ email: "", message: "", consent: false });
   const [formState, setFormState] = useState("idle");
-  const [adsConsent, setAdsConsent] = useState(() => localStorage.getItem("asianhub-ads-consent") || "unset");
+  const [adsConsent, setAdsConsent] = useState(() => { try { return localStorage.getItem("asianhub-ads-consent") || "unset"; } catch (_) { return "unset"; } });
 
   useEffect(() => {
-    if (adsConsent !== "accepted" || window.__asianHubAdsLoaded) return;
-    window.dataLayer = window.dataLayer || [];
-    window.gtag = window.gtag || function(){ window.dataLayer.push(arguments); };
-    window.gtag("js", new Date());
-    window.gtag("config", "AW-18529286301");
-    const script = document.createElement("script");
-    script.async = true;
-    script.src = "https://www.googletagmanager.com/gtag/js?id=AW-18529286301";
-    document.head.appendChild(script);
-    window.__asianHubAdsLoaded = true;
+    if (adsConsent === "unset") return;
+    window.gtag?.("consent", "update", {
+      ad_storage: adsConsent === "accepted" ? "granted" : "denied",
+      ad_user_data: adsConsent === "accepted" ? "granted" : "denied",
+      ad_personalization: adsConsent === "accepted" ? "granted" : "denied",
+      analytics_storage: "denied"
+    });
   }, [adsConsent]);
 
   function chooseAdsConsent(value) {
-    localStorage.setItem("asianhub-ads-consent", value);
+    try { localStorage.setItem("asianhub-ads-consent", value); } catch (_) {}
     setAdsConsent(value);
   }
 
@@ -119,8 +116,8 @@ function App() {
       <section className="faq section" id="faq"><div className="section-heading"><span className="kicker">FAQ</span><h2>Frequently asked <em>questions</em></h2></div><div className="faq-list">{faqs.map(([q,a],i)=><div className="faq-item" key={q}><button onClick={()=>setOpenFaq(openFaq===i?-1:i)} aria-expanded={openFaq===i}>{q}<ChevronDown className={openFaq===i?"rotated":""}/></button>{openFaq===i&&<p>{a}</p>}</div>)}</div></section>
     </main>
 
-    <footer className="footer"><div className="footer-main"><div className="footer-about"><a className="brand" href="#home"><span>ASIAN</span><b>HUB</b></a><p>Sports, games, teams, and match analysis. Explore the community and send a message to express interest.</p></div><div><h4>Explore</h4><button onClick={()=>jump("platforms")}>Community topics</button><button onClick={()=>jump("agent")}>About Asian Hub</button><button onClick={()=>jump("faq")}>FAQ</button><button onClick={()=>jump("application")}>Join / contact</button></div><div><h4>Community</h4><a href="/about.html">About</a><a href="/contact.html">Contact</a><a href="/community-rules.html">Community Rules</a><a href="/terms.html">Terms of Use</a><a href="/privacy.html">Privacy Policy</a><button onClick={()=>{localStorage.removeItem("asianhub-ads-consent");setAdsConsent("unset")}}>Cookie settings</button></div><div><h4>Join</h4><button onClick={()=>jump("application")}>Send a message</button><span className="footer-fact">English · All countries except Bangladesh</span></div></div><div className="footer-bottom"><span>© {new Date().getFullYear()} Asian Hub Community.</span><span>Sports and games discussion. This site currently has no live forum or member services.</span></div></footer>
-    {adsConsent === "unset" && <aside className="cookie-banner" aria-label="Advertising measurement choice"><div><strong>Advertising measurement</strong><p>With your permission, Google Ads may use cookies or similar technologies to measure advertising. Your form contents are not sent to Google. Read our <a href="/privacy.html">Privacy Policy</a>.</p></div><div className="cookie-actions"><button type="button" onClick={() => chooseAdsConsent("rejected")}>Reject</button><button type="button" onClick={() => chooseAdsConsent("accepted")}>Allow</button></div></aside>}
+    <footer className="footer"><div className="footer-main"><div className="footer-about"><a className="brand" href="#home"><span>ASIAN</span><b>HUB</b></a><p>Sports, games, teams, and match analysis. Explore the community and send a message to express interest.</p></div><div><h4>Explore</h4><button onClick={()=>jump("platforms")}>Community topics</button><button onClick={()=>jump("agent")}>About Asian Hub</button><button onClick={()=>jump("faq")}>FAQ</button><button onClick={()=>jump("application")}>Join / contact</button></div><div><h4>Community</h4><a href="/about.html">About</a><a href="/contact.html">Contact</a><a href="/community-rules.html">Community Rules</a><a href="/terms.html">Terms of Use</a><a href="/privacy.html">Privacy Policy</a><button onClick={()=>{try { localStorage.removeItem("asianhub-ads-consent"); } catch (_) {} setAdsConsent("unset")}}>Cookie settings</button></div><div><h4>Join</h4><button onClick={()=>jump("application")}>Send a message</button><span className="footer-fact">English · All countries except Bangladesh</span></div></div><div className="footer-bottom"><span>© {new Date().getFullYear()} Asian Hub Community.</span><span>Sports and games discussion. This site currently has no live forum or member services.</span></div></footer>
+    {adsConsent === "unset" && <aside className="cookie-banner" aria-label="Advertising measurement choice"><div><strong>Advertising measurement</strong><p>Google Ads uses limited cookieless measurement while consent is denied. If you allow, Google may also use advertising cookies. Your form contents are not sent to Google. Read our <a href="/privacy.html">Privacy Policy</a>.</p></div><div className="cookie-actions"><button type="button" onClick={() => chooseAdsConsent("rejected")}>Reject</button><button type="button" onClick={() => chooseAdsConsent("accepted")}>Allow</button></div></aside>}
   </div>;
 }
 
