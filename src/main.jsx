@@ -63,6 +63,9 @@ function App() {
       });
       const result = await response.json().catch(() => ({}));
       if (!response.ok || Number(result.created) < 1) throw new Error("submission_failed");
+      if (adsConsent === "accepted") {
+        window.gtag?.("event", "conversion", { send_to: "AW-18529286301/QypBCLKd26UdEJ3xuYNF" });
+      }
       setForm({ email: "", message: "", consent: false });
       setFormState("sent");
     } catch {
