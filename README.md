@@ -1,26 +1,30 @@
-# Asian Hub Community
+# Asian Hub landing page
 
-An English-language sports and games community information website for people in all countries except Bangladesh, focused on teams, competitions, and match analysis.
+Responsive React + Vite landing page with games and sports information, E-Wallet Agent details, FAQ, and an application form UI.
 
-Asian Hub is a community name. This site does not claim that a registered company or licensed operator exists. The website currently provides information and a contact/interest form; it does not host a live forum, chat, or events.
-
-## Local development
-
+## Run locally
 ```bash
 npm install
 npm run dev
 ```
 
-## Build and deploy
-
+## Build
 ```bash
 npm run build
 ```
+The production build is created in `dist/`.
 
-Netlify is configured by `netlify.toml` to publish `dist/`. The static page and its React content are the same for visitors and crawlers. There are no user-agent-specific pages or redirects. `robots.txt` permits Google AdsBot crawling and `sitemap.xml` lists the public information pages.
+## Deploy
+- **Netlify:** `netlify.toml` sets build command `npm run build` and publish directory `dist`.
+- **Vercel:** Framework preset Vite, build command `npm run build`, output directory `dist`.
+- **Static hosting/VPS:** Upload the contents of `dist/` to your web root.
 
-The contact form sends `email`, `message`, `consent`, and `submittedAt` to the SheetDB API configured in `src/main.jsx`. Set the connected sheet's first row to four separate column headers: `email`, `message`, `consent`, `submittedAt`. In the SheetDB dashboard, allow only Create (POST) for this public form endpoint; enable read/search only if there is a separate, justified need. Google Ads tag `AW-18529286301` loads with Consent Mode defaults set to denied for advertising storage, user data, and personalization. A visitor can allow or reject advertising measurement; a rejection keeps these consent states denied. In denied mode, Google may receive cookieless measurement pings. Form content is not sent to Google Ads. The Contact conversion event sends only after a successful SheetDB response and only when the visitor has allowed advertising measurement.
+## Before launch
+1. Review applicable local rules before publishing games or sports information.
+2. Form submissions are sent through SheetDB to the connected Google Sheet. Restrict the API to Create (POST), set the allowed CORS origin to `https://asianretailhub.com`, and keep the Sheet private. The public frontend exposes the API URL, so CORS alone does not block direct API calls.
+3. Review the Terms and Privacy pages against the actual data handling, retention period, contact process, and laws relevant to the site's audience.
+4. Review any third-party names, images, or content before publishing them.
 
-No age requirement is stated on the site because none has been supplied. Confirm the intended age policy and applicable country requirements before launch. The legal/business identity of the community operators has also not been supplied; the site identifies Asian Hub as a community name and does not invent a legal entity. Contact is through the form.
-
-Before launch, verify the SheetDB column headers and Create (POST) permission, then submit a controlled test and verify/delete that row. Also verify submission storage and deletion, desktop and mobile layouts, all routes and footer links, and the deployed HTTPS domain.
+## Domain
+The site owner selected `asianretailhub.com`. Configure the custom domain and DNS records in Netlify before expecting that address to serve the site.
+# asianhub
